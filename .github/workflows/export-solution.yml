@@ -1,0 +1,29 @@
+name: Export and unpack solution
+
+# Manual starting point. Verify the inputs against the microsoft/powerplatform-actions README
+# before relying on it, and add repository secrets first.
+on:
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: microsoft/powerplatform-actions/actions-install@v1
+
+      - uses: microsoft/powerplatform-actions/export-solution@v1
+        with:
+          environment-url: ${{ secrets.DEV_ENV_URL }}
+          app-id: ${{ secrets.POWERPLATFORM_APP_ID }}
+          client-secret: ${{ secrets.POWERPLATFORM_CLIENT_SECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORM_TENANT_ID }}
+          solution-name: TenantSteward
+          solution-output-file: out/TenantSteward.zip
+
+      - uses: microsoft/powerplatform-actions/unpack-solution@v1
+        with:
+          solution-file: out/TenantSteward.zip
+          solution-folder: solutions/TenantSteward
+          solution-type: Unmanaged
