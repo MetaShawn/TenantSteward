@@ -29,7 +29,7 @@ namespace TenantSteward.Scoring
     {
         public static int Score(ExposureSignals signals)
         {
-            if (signals == null) throw new ArgumentNullException("signals");
+            if (signals == null) throw new ArgumentNullException(nameof(signals));
 
             double score = 0;
             score += Math.Min(Math.Max(signals.AnonymousLinkCount, 0), 5) * 12;       // up to 60
@@ -38,7 +38,9 @@ namespace TenantSteward.Scoring
             if (signals.DaysSinceLastActivity > 180) score += 5;                      // stale
             if (signals.ItemCount > 1000) score += 5;                                 // large blast radius
 
-            return (int)Math.Min(100, Math.Round(score));
+            // AwayFromZero: the default (ToEven) rounds 4.5 down to 4 but 1.5 up to 2, which made
+            // odd link counts score unevenly. Half-up is predictable and easy to explain.
+            return (int)Math.Min(100, Math.Round(score, MidpointRounding.AwayFromZero));
         }
 
         public static Severity Classify(int score)
