@@ -20,3 +20,5 @@ Publisher prefix: `ts`.
 ## Scoring
 
 See `src/RiskScoring/RiskScorer.cs`. Weights are illustrative; record every change here.
+
+- 2026-10-17: Score rounds midpoints half-up (MidpointRounding.AwayFromZero). Default banker's rounding scored 3 org links as 4 instead of 5.
