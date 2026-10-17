@@ -13,8 +13,8 @@ A build-along guide. Each chapter produces something committed to this repo, and
 
 | # | Chapter | Status |
 |---|---|---|
-| 0 | Repo setup | [ ] |
-| 1 | RiskScoring library and tests | [ ] |
+| 0 | Repo setup | [X] |
+| 1 | RiskScoring library and tests | [X] |
 | 2 | Dataverse data model | [ ] |
 | 3 | Plug-in and custom API | [ ] |
 | 4 | Scanner Azure Function | [ ] |
